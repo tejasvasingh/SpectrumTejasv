@@ -1,11 +1,12 @@
 import React from 'react';
+import BaseLayout from '../../Components/BaseLayout';
 import {Text, View} from 'react-native';
 
 const Buttons = () => {
   return (
-    <View>
+    <BaseLayout>
       <Text>Buttons</Text>
-    </View>
+    </BaseLayout>
   );
 };
 
