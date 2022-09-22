@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Alert, Text, TextInput, TouchableOpacity, View} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import BaseLayout from '../../Components/BaseLayout';
 import {ScreenName} from '../../Constant/ScreenName';
 import {NAME} from '../../Store/constant/mainConstatnts';
@@ -8,11 +8,22 @@ import {setName} from '../../Store/action/mainAction';
 import {styles} from './styles';
 
 const Welcome = ({navigation}) => {
-  const [name, setName] = useState('');
+  const [userName, setName] = useState('');
+  const {name} = useSelector((state: any) => state);
   const dispatch = useDispatch();
 
   const getName = () => {
-    dispatch({payload: name, type: NAME});
+    dispatch({payload: userName, type: NAME});
+    Alert.alert(`${userName} your data get saved you can check in Main Screen`);
+  };
+
+  const onPressName = () => {
+    if (name.length === 0) {
+      Alert.alert('Please enter your name and Press save Button');
+    }
+    if (name.length !== 0) {
+      navigation.navigate(ScreenName.main);
+    }
   };
   return (
     <BaseLayout>
@@ -22,7 +33,8 @@ const Welcome = ({navigation}) => {
           <TextInput
             style={styles.input}
             onChangeText={setName}
-            value={name}
+            value={userName}
+            placeholderTextColor={'white'}
             placeholder="Enter your name"
           />
           <TouchableOpacity style={styles.saveButton} onPress={() => getName()}>
@@ -37,7 +49,7 @@ const Welcome = ({navigation}) => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.buttonStyle}
-            onPress={() => navigation.navigate(ScreenName.main)}>
+            onPress={() => onPressName()}>
             <Text style={styles.buttonText}>Main</Text>
           </TouchableOpacity>
         </View>
@@ -46,3 +58,4 @@ const Welcome = ({navigation}) => {
   );
 };
 export default Welcome;
+

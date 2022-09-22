@@ -13,7 +13,6 @@ const SwipButton = () => {
       width={330}
       title="Swipe to Right"
       titleColor="white"
-      shouldResetAfterSuccess="true"
       onSwipeSuccess={() => {
         Alert.alert('Swiped Successfully!');
       }}

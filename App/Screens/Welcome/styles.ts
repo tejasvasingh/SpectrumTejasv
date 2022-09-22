@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-
+import { StyleSheet, Dimensions } from "react-native";
+const { height, width } = Dimensions.get('window');
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -31,8 +31,10 @@ export const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 20,
     borderWidth: 1,
+    color: 'white',
     borderColor: '#702453',
     borderRadius: 10,
+    width: width - 100,
     textAlign: 'center',
   },
   saveButton: {
