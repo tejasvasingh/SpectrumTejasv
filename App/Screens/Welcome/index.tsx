@@ -1,11 +1,19 @@
 import React, {useState} from 'react';
 import {Alert, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {useDispatch} from 'react-redux';
 import BaseLayout from '../../Components/BaseLayout';
 import {ScreenName} from '../../Constant/ScreenName';
+import {NAME} from '../../Store/constant/mainConstatnts';
+import {setName} from '../../Store/action/mainAction';
 import {styles} from './styles';
 
 const Welcome = ({navigation}) => {
   const [name, setName] = useState('');
+  const dispatch = useDispatch();
+
+  const getName = () => {
+    dispatch({payload: name, type: NAME});
+  };
   return (
     <BaseLayout>
       <View style={styles.container}>
@@ -17,10 +25,8 @@ const Welcome = ({navigation}) => {
             value={name}
             placeholder="Enter your name"
           />
-          <TouchableOpacity
-            style={styles.saveButton}
-            onPress={() => Alert.alert(name)}>
-            <Text style={styles.buttonText}>Buttons</Text>
+          <TouchableOpacity style={styles.saveButton} onPress={() => getName()}>
+            <Text style={styles.buttonText}>SAVE</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.buttonContainer}>
